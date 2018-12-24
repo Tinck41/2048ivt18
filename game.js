@@ -10,8 +10,7 @@ var position = [];
 var OK = document.getElementById('OK');
 var playing = 0;
 var width = canvas.width/size;
-
-var colors = ["#538fef", "#294470"]
+var color=["gray","#61edd5","#4048bc","#40bc5a","#dcff56","#ff35d6","#fc19bc","#00C800","#fc1951","#b0fc19","#ff0000","#ff00d4","#ff00d4"];
 
 function clickOK() {
 	grid = [];
@@ -91,38 +90,24 @@ function draw() {
 	var w = canvas.width/size;
 	for (i = 0; i < size; i++){
     	for (j = 0; j < size; j++) {
-    		/*if (grid[i][j]!=0) {
-    			drawCell(grid[i][j]);
-    			ctx.fill();
-    		} else ctx.noFill;*/
-    		ctx.lineWidth = 2;
-    		ctx.strokeRect(i*w, j*w, w, w);
-    		var val = grid[i][j];
-    		if (grid[i][j] != 0) {
-    			drawCellValue(i,j,w,val);
-    		} else ctx.clearRect (i*w, j*w, w, w);
-  		}
-  	}
-}
+    		if(grid[i][j]!=0)
+				ctx.fillStyle=color[Math.log2(grid[i][j])];
+			else{
+				ctx.fillStyle="rgb(230,230,230)";}
+			ctx.fillRect(i*w+2,j*w+2,w-4,w-4);
 
-function drawCell(a) {
-	var w = canvas.width/size;
-	switch (grid[i][j]) {
-		case 0: ctx.fillStyle = '#C1BEBE'; ctx.rect(i*w, j*w, w-1, w-1); break;
-		case 2: ctx.fillStyle = colors[0]; ctx.rect(i*w, j*w, w-1, w-1); break;
-		case 4: ctx.fillStyle = colors[1]; ctx.rect(i*w, j*w, w-1, w-1); break;
+			if(grid[i][j]!=0){
+				ctx.font = "40px Aria";
+				ctx.fillStyle = "black";
+				ctx.textAlign = "center";
+				ctx.fillText(grid[i][j], i*w+w/2,j*w+w/2+w/7); 
+			}
+
+		}
 	}
 }
 
-function drawCellValue(i, j, w, val) {
-	ctx.font = "60px Aria"
-    if (size>6 ) ctx.font = "40px Aria";
-    if (size>9 ) ctx.font = "20px Aria";
-    ctx.textAlign = 'center';
-    ctx.fillStyle = '#000000';
-    ctx.clearRect (i*w, j*w, w, w);
-    ctx.fillText(val, i*w+w/2, j*w+w/2+w/7);
-}
+
 
 function slideDown() {
 	slideD();
