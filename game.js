@@ -3,6 +3,7 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var sizes = document.getElementById('size');
 var size = sizes.value;
+var score = 0;
 var min = 0;
 var max = size*size-1;
 let position = [];
@@ -10,20 +11,34 @@ var OK = document.getElementById('OK');
 var playing = 0;
 var width = canvas.width/size;
 
+function clickOK() {
+	sizes = document.getElementById('size');
+	size = sizes.value;
+	max = size*size-1;
+	width = canvas.width/size;
+	setup();
+}
+
 setup();
 
 document.onkeypress = function(event) {
 	if (event.keyCode == 115) {
 		slideDown();
+		addNumber();
+    	draw();
 	} else if (event.keyCode == 119) {
 		slideUp();
+		addNumber();
+    	draw();
 	} else if (event.keyCode == 97) {
 		slideLeft();
+		addNumber();
+    	draw();
 	} else if (event.keyCode == 100) {
 		slideRight();
+		addNumber();
+    	draw();
 	}
-	addNumber();
-    draw();
     console.table(grid);
 }
 
@@ -73,6 +88,8 @@ function draw() {
     		let val = grid[i][j];
     		if (grid[i][j] !== 0) {
     			ctx.font = "60px Aria"
+    			if (size>6 ) ctx.font = "40px Aria";
+    			if (size>9 ) ctx.font = "20px Aria";
     			ctx.textAlign = 'center';
     			ctx.noStroke;
     			ctx.clearRect (i*w, j*w, w, w);
@@ -115,6 +132,8 @@ function multiplyD() {
 					if (grid[i][coll]==grid[i][coll-1]) {
 						grid[i][coll-1] *= 2;
 						grid[i][coll] = 0;
+						score += grid[i][coll-1]; 
+						document.getElementById('score').innerHTML =score;
 						coll-=2;
 						j--;
 						break;
@@ -159,6 +178,8 @@ function multiplyU() {
 					if (grid[i][coll]==grid[i][coll+1]) {
 						grid[i][coll+1] *= 2;
 						grid[i][coll] = 0;
+						score += grid[i][coll+1];
+						document.getElementById('score').innerHTML =score;
 						coll+=2;
 						j++;
 						break;
@@ -205,6 +226,8 @@ function multiplyL() {
 					if (grid[row][j]==grid[row+1][j]) {
 						grid[row][j] *= 2;
 						grid[row+1][j] = 0;
+						score += grid[row][j];
+						document.getElementById('score').innerHTML =score;
 						row+=2;
 						i++;
 						break;
@@ -251,6 +274,8 @@ function multiplyR() {
 					if (grid[row][j]==grid[row-1][j]) {
 						grid[row][j] *= 2;
 						grid[row-1][j] = 0;
+						score += grid[row][j];
+						document.getElementById('score').innerHTML =score;
 						row-=2;
 						i--;
 						break;

@@ -10,15 +10,17 @@
 	<h1>2048</h1>
 </header>
 <body>
-	<div id="HTMLgrid">
 		<div id="inform">
-			<div id="divScore"><h2>Your score:</h2><p id="score"></p></div>
-			<input type="number" id="size" value="4">
-			<input type="button" id="OK" onclick="clickOK()" value="OK">
+			<h2>Your score:</h2><p id="score"></p>
+			<div>
+				<p>
+				<input type="number" id="size" value="4">
+				<input type="button" id="OK" onclick="clickOK()" value="OK">
+				</p>
+			</div>
 		</div>
 		<canvas id="canvas" width="500" height="500">
 		</canvas>
-	</div>
 </body>
 <script type="text/javascript" src="game.js"></script>
 </html>
