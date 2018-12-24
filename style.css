@@ -22,7 +22,8 @@ h1 {
 }
 
 @media (max-width: 1919px) {#canvas {
-	top: 70%;
+	top: 75%;
+	margin-bottom: 10%;
 }}
 
 h2 {

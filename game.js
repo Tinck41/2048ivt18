@@ -6,14 +6,18 @@ var size = sizes.value;
 var score = 0;
 var min = 0;
 var max = size*size-1;
-let position = [];
+var position = [];
 var OK = document.getElementById('OK');
 var playing = 0;
 var width = canvas.width/size;
 
+var colors = ["#538fef", "#294470"]
+
 function clickOK() {
+	grid = [];
 	sizes = document.getElementById('size');
-	size = sizes.value;
+	size = sizes.value; 
+	if (size<3 || size>18 ) return false;
 	max = size*size-1;
 	width = canvas.width/size;
 	setup();
@@ -23,9 +27,11 @@ setup();
 
 document.onkeypress = function(event) {
 	if (event.keyCode == 115) {
-		slideDown();
-		addNumber();
-    	draw();
+		if (slideDown()) {
+			slideDown();
+			addNumber();
+	    	draw();
+    	}
 	} else if (event.keyCode == 119) {
 		slideUp();
 		addNumber();
@@ -80,23 +86,40 @@ function addNumber() {
 }
 
 function draw() {
-	let w = canvas.width/size;
+	var w = canvas.width/size;
 	for (i = 0; i < size; i++){
-    	for (j = 0; j < size; j++){
+    	for (j = 0; j < size; j++) {
+    		/*if (grid[i][j]!=0) {
+    			drawCell(grid[i][j]);
+    			ctx.fill();
+    		} else ctx.noFill;*/
     		ctx.lineWidth = 2;
     		ctx.strokeRect(i*w, j*w, w, w);
-    		let val = grid[i][j];
-    		if (grid[i][j] !== 0) {
-    			ctx.font = "60px Aria"
-    			if (size>6 ) ctx.font = "40px Aria";
-    			if (size>9 ) ctx.font = "20px Aria";
-    			ctx.textAlign = 'center';
-    			ctx.noStroke;
-    			ctx.clearRect (i*w, j*w, w, w);
-    			ctx.fillText(val, i*w+w/2, j*w+w/2+w/7);
+    		var val = grid[i][j];
+    		if (grid[i][j] != 0) {
+    			drawCellValue(i,j,w,val);
     		} else ctx.clearRect (i*w, j*w, w, w);
   		}
   	}
+}
+
+function drawCell(a) {
+	var w = canvas.width/size;
+	switch (grid[i][j]) {
+		case 0: ctx.fillStyle = '#C1BEBE'; ctx.rect(i*w, j*w, w-1, w-1); break;
+		case 2: ctx.fillStyle = colors[0]; ctx.rect(i*w, j*w, w-1, w-1); break;
+		case 4: ctx.fillStyle = colors[1]; ctx.rect(i*w, j*w, w-1, w-1); break;
+	}
+}
+
+function drawCellValue(i, j, w, val) {
+	ctx.font = "60px Aria"
+    if (size>6 ) ctx.font = "40px Aria";
+    if (size>9 ) ctx.font = "20px Aria";
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#000000';
+    ctx.clearRect (i*w, j*w, w, w);
+    ctx.fillText(val, i*w+w/2, j*w+w/2+w/7);
 }
 
 function slideDown() {
