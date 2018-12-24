@@ -21,6 +21,8 @@ function clickOK() {
 	max = size*size-1;
 	width = canvas.width/size;
 	setup();
+	score = 0;
+	document.getElementById('score').innerHTML = score;
 }
 
 setup();
