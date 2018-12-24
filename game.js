@@ -2,14 +2,14 @@ var grid = [];
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var sizes = document.getElementById('size');
-var size = sizes.value;
+var size = 4;
 var score = 0;
 var min = 0;
 var max = size*size-1;
 var position = [];
 var OK = document.getElementById('OK');
 var playing = 0;
-var width = canvas.width/size;
+var w = canvas.width/size;
 var color=["gray","#61edd5","#4048bc","#40bc5a","#dcff56","#ff35d6","#fc19bc","#00C800","#fc1951","#b0fc19","#ff0000","#ff00d4","#ff00d4"];
 
 function clickOK() {
@@ -18,7 +18,7 @@ function clickOK() {
 	size = sizes.value; 
 	if (size<3 || size>18 ) return false;
 	max = size*size-1;
-	width = canvas.width/size;
+	w = canvas.width/size;
 	setup();
 	score = 0;
 	document.getElementById('score').innerHTML = score;
@@ -87,15 +87,13 @@ function addNumber() {
 }
 
 function draw() {
-	var w = canvas.width/size;
 	for (i = 0; i < size; i++){
     	for (j = 0; j < size; j++) {
     		if(grid[i][j]!=0)
 				ctx.fillStyle=color[Math.log2(grid[i][j])];
 			else{
-				ctx.fillStyle="rgb(230,230,230)";}
+				ctx.fillStyle="#e6e6e6";}
 			ctx.fillRect(i*w+2,j*w+2,w-4,w-4);
-
 			if(grid[i][j]!=0){
 				ctx.font = "40px Aria";
 				ctx.fillStyle = "black";
