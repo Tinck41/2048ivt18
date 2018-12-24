@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2048 - ivt18 project</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+</head>
+<header>
+	<h1>2048</h1>
+</header>
+<body>
+	<div id="HTMLgrid">
+		<div id="inform">
+			<div id="divScore"><h2>Your score:</h2><p id="score"></p></div>
+			<input type="number" id="size" value="4">
+			<input type="button" id="OK" onclick="clickOK()" value="OK">
+		</div>
+		<canvas id="canvas" width="500" height="500">
+		</canvas>
+	</div>
+</body>
+<script type="text/javascript" src="game.js"></script>
+</html>
