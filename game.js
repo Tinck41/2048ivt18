@@ -27,27 +27,34 @@ function clickOK() {
 
 setup();
 
+function lose() {
+	if (slideDown() && slideUp() && slideLeft() && slideRight()) return true;
+	else return false;
+}
+
 document.onkeypress = function(event) {
-	if (event.keyCode == 115) {
-		if (!slideDown()) {
-			addNumber();
-	    	draw();
-    	}
-	} else if (event.keyCode == 119) {
-		if (!slideUp()) {
-			addNumber();
-    		draw();
-    	}
-	} else if (event.keyCode == 97) {
-		if (!slideLeft()) {
-			addNumber();
-    		draw();
-    	}	
-	} else if (event.keyCode == 100) {
-		if (!slideRight()) {
-			addNumber();
-    		draw();
-    	}
+	if (lose) {
+		if (event.keyCode == 115) {
+			if (!slideDown()) {
+				addNumber();
+		    	draw();
+	    	}
+		} else if (event.keyCode == 119) {
+			if (!slideUp()) {
+				addNumber();
+	    		draw();
+	    	}
+		} else if (event.keyCode == 97) {
+			if (!slideLeft()) {
+				addNumber();
+	    		draw();
+	    	}	
+		} else if (event.keyCode == 100) {
+			if (!slideRight()) {
+				addNumber();
+	    		draw();
+	    	}
+		}
 	}
     console.table(grid);
 }
