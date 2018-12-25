@@ -29,26 +29,26 @@ setup();
 
 document.onkeypress = function(event) {
 	if (event.keyCode == 115) {
+		slideDown();
 		if (!slideDown()) {
-			slideDown();
 			addNumber();
 	    	draw();
     	}
 	} else if (event.keyCode == 119) {
+		slideUp();
 		if (!slideUp()) {
-			slideUp();
 			addNumber();
     		draw();
     	}
 	} else if (event.keyCode == 97) {
+		slideLeft();
 		if (!slideLeft()) {
-			slideLeft();
 			addNumber();
     		draw();
     	}	
 	} else if (event.keyCode == 100) {
+		slideRight();
 		if (!slideRight()) {
-			slideRight();
 			addNumber();
     		draw();
     	}
@@ -112,13 +112,13 @@ function draw() {
 	}
 }
 
-function changes() {
+function changes(mas) {
 	for (i=0;i<size; i++) {
 		for (j=0; j<size; j++) {
-			if (mas[i][j]!=grid[i][j]) return false;
+			if (mas[i][j]!=grid[i][j]) return true;
 		}
 	}
-	return true;
+	return false;
 }
 
 
@@ -127,7 +127,7 @@ function slideDown() {
 	mas = grid;
 	slideD();
 	multiplyD();
-	if (changes()) return true;
+	if (changes(mas)) return true;
 	else return false;
 
 }
@@ -177,7 +177,7 @@ function slideUp() {
 	mas = grid;
 	slideU();
 	multiplyU();
-	if (changes()) return true;
+	if (changes(mas)) return true;
 	else return false;
 }
 
@@ -226,7 +226,7 @@ function slideLeft() {
 	mas = grid;
 	slideL();
 	multiplyL();
-	if (changes()) return true;
+	if (changes(mas)) return true;
 	else return false;
 }
 
@@ -277,7 +277,7 @@ function slideRight() {
 	mas = grid;
 	slideR();
 	multiplyR();
-	if (changes()) return true;
+	if (changes(mas)) return true;
 	else return false;
 }
 
