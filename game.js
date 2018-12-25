@@ -4,6 +4,7 @@ var ctx = canvas.getContext('2d');
 var sizes = document.getElementById('size');
 var size = 4;
 var score = 0;
+var mas = 0;
 var min = 0;
 var max = size*size-1;
 var position = [];
@@ -28,23 +29,29 @@ setup();
 
 document.onkeypress = function(event) {
 	if (event.keyCode == 115) {
-		if (slideDown()) {
+		if (!slideDown()) {
 			slideDown();
 			addNumber();
 	    	draw();
     	}
 	} else if (event.keyCode == 119) {
-		slideUp();
-		addNumber();
-    	draw();
+		if (!slideUp()) {
+			slideUp();
+			addNumber();
+    		draw();
+    	}
 	} else if (event.keyCode == 97) {
-		slideLeft();
-		addNumber();
-    	draw();
+		if (!slideLeft()) {
+			slideLeft();
+			addNumber();
+    		draw();
+    	}	
 	} else if (event.keyCode == 100) {
-		slideRight();
-		addNumber();
-    	draw();
+		if (!slideRight()) {
+			slideRight();
+			addNumber();
+    		draw();
+    	}
 	}
     console.table(grid);
 }
@@ -105,11 +112,24 @@ function draw() {
 	}
 }
 
+function changes() {
+	for (i=0;i<size; i++) {
+		for (j=0; j<size; j++) {
+			if (mas[i][j]!=grid[i][j]) return false;
+		}
+	}
+	return true;
+}
+
 
 
 function slideDown() {
+	mas = grid;
 	slideD();
 	multiplyD();
+	if (changes()) return true;
+	else return false;
+
 }
 
 function slideD() {
@@ -154,8 +174,11 @@ function multiplyD() {
 }
 
 function slideUp() {
+	mas = grid;
 	slideU();
 	multiplyU();
+	if (changes()) return true;
+	else return false;
 }
 
 function slideU() {
@@ -200,8 +223,11 @@ function multiplyU() {
 }
 
 function slideLeft() {
+	mas = grid;
 	slideL();
 	multiplyL();
+	if (changes()) return true;
+	else return false;
 }
 
 function slideL() {
@@ -248,8 +274,11 @@ function multiplyL() {
 }
 
 function slideRight() {
+	mas = grid;
 	slideR();
 	multiplyR();
+	if (changes()) return true;
+	else return false;
 }
 
 function slideR() {
