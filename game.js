@@ -29,25 +29,21 @@ setup();
 
 document.onkeypress = function(event) {
 	if (event.keyCode == 115) {
-		slideDown();
 		if (!slideDown()) {
 			addNumber();
 	    	draw();
     	}
 	} else if (event.keyCode == 119) {
-		slideUp();
 		if (!slideUp()) {
 			addNumber();
     		draw();
     	}
 	} else if (event.keyCode == 97) {
-		slideLeft();
 		if (!slideLeft()) {
 			addNumber();
     		draw();
     	}	
 	} else if (event.keyCode == 100) {
-		slideRight();
 		if (!slideRight()) {
 			addNumber();
     		draw();
