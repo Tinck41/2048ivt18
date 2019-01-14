@@ -33,30 +33,29 @@ function lose() {
 }
 
 document.onkeypress = function(event) {
-	if (lose) {
-		if (event.keyCode == 115) {
-			if (!slideDown()) {
-				addNumber();
-		    	draw();
-	    	}
-		} else if (event.keyCode == 119) {
-			if (!slideUp()) {
-				addNumber();
-	    		draw();
-	    	}
-		} else if (event.keyCode == 97) {
-			if (!slideLeft()) {
-				addNumber();
-	    		draw();
-	    	}	
-		} else if (event.keyCode == 100) {
-			if (!slideRight()) {
-				addNumber();
-	    		draw();
-	    	}
-		}
-	}
-    console.table(grid);
+		mas = JSON.parse(JSON.stringify(grid));
+			if (event.keyCode == 115) {
+				if (slideDown()) {
+					addNumber();
+			    	draw();
+		    	}
+			} else if (event.keyCode == 119) {
+				if (slideUp()) {
+					addNumber();
+		    		draw();
+		    	}
+			} else if (event.keyCode == 97) {
+				if (slideLeft()) {
+					addNumber();
+		    		draw();
+		    	}	
+			} else if (event.keyCode == 100) {
+				if (slideRight()) {
+					addNumber();
+		    		draw();
+		    	}
+			}
+	    console.table(grid);
 }
 
 
@@ -115,8 +114,8 @@ function draw() {
 	}
 }
 
-function changes(mas) {
-	for (i=0;i<size; i++) {
+function changes(A) {
+	for (i=0; i<size; i++) {
 		for (j=0; j<size; j++) {
 			if (mas[i][j]!=grid[i][j]) return true;
 		}
@@ -127,7 +126,6 @@ function changes(mas) {
 
 
 function slideDown() {
-	mas = grid;
 	slideD();
 	multiplyD();
 	if (changes(mas)) return true;
@@ -177,7 +175,6 @@ function multiplyD() {
 }
 
 function slideUp() {
-	mas = grid;
 	slideU();
 	multiplyU();
 	if (changes(mas)) return true;
@@ -226,7 +223,6 @@ function multiplyU() {
 }
 
 function slideLeft() {
-	mas = grid;
 	slideL();
 	multiplyL();
 	if (changes(mas)) return true;
@@ -277,7 +273,6 @@ function multiplyL() {
 }
 
 function slideRight() {
-	mas = grid;
 	slideR();
 	multiplyR();
 	if (changes(mas)) return true;
